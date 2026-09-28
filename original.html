@@ -1,47 +1,139 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
-  <head>
 
+
+
+<head> <!-- HEAD IS INTERNAL SYSTEMS -->
     <title>My Web Page</title>
-  </head>
-  <body>
 
-    <h1>I love drawing!!!</h1>
-
-
-    <img src="/images/long_rectangle.png" alt="long :)">
-
-
-
-    
     <style>
-      /* Your parent container */
 
 
-      /* The target image CSS */
-      .custom-image {
-        position: absolute;
-        
-        /*Change these values to move the image where you want */
-        top: 20px;          /* Distance from the top border */
-        left: 3000px;         /* Distance from the left border */
-        
-        /* Optional size constraints */
-        width: 150px;       
-        height: auto;
+
+
+
+
+
+
+
+
+
+
+        /* LONG RECTANGLE */
+        .custom-image1 {
+            position: absolute;
+            top: 0px;       /* Distance from the top */
+            left: 0px;      /* Distance from the side */
+            width: auto;     /* Size */
+            height: 1080px;     /* Size */
+            pointer-events: none; /* Stops all clicks, touches, and interactions */
+            user-select: none;    /* Prevents any accidental text/element highlighting */
+        }
+    </style>
+
+    <style>
+
+      /* ROUNDED SQUARE */
+      .custom-image2 {
+          position: absolute;
+          top: 10px;       /* Distance from the top */
+          left: -8px;      /* Distance from the side */
+          width: 100px;     /* Size */
+          height: auto;     /* Size */
+
+      }
+    </style>
+
+
+    <style>
+
+      /* ROUNDED SQUARE 2 */
+      .custom-image3 {
+          position: absolute;
+          top: 110px;       /* Distance from the top */
+          left: -8px;      /* Distance from the side */
+          width: 100px;     /* Size */
+          height: auto;     /* Size */
+      }
+    </style>
+
+
+    <style>
+
+      /* ROUNDED SQUARE 3 */
+      .custom-image4 {
+          position: absolute;
+          top: 210px;       /* Distance from the top */
+          left: -8px;      /* Distance from the side */
+          width: 100px;     /* Size */
+          height: auto;     /* Size */
       }
     </style>
 
 
 
+    <style>
+
+      /* ROUNDED SQUARE 4 */
+      .custom-image5 {
+          position: absolute;
+          top: 310px;       /* Distance from the top */
+          left: -8px;      /* Distance from the side */
+          width: 100px;     /* Size */
+          height: auto;     /* Size */
+      }
+    </style>
 
 
-    </head>
-    <body>
+    <style>
+
+      /* ROUNDED SQUARE 5 */
+      .custom-image6 {
+          position: absolute;
+          top: 410px;       /* Distance from the top */
+          left: -8px;      /* Distance from the side */
+          width: 100px;     /* Size */
+          height: auto;     /* Size */
+      }
+   
+   </style>
+
+
+
+</head>
+
+
+
+
+<body> <!-- BODY IS VISUAL COMPONENTS -->
+
+
+
+
+
+
+
+  
+    <h1>I love drawing!!!</h1>
     
-    <div class="container">
-      <img src="/images/rounded_square.png" alt="Example Image">
-    </div>
+    <!-- 'custom-image' class so CSS applies to this image -->
+    <img src="/images/long_rectangle.png" alt="long :)" class="custom-image1">
+
+    <img src="/images/rounded_square.png" alt="Example Image" class="custom-image2">
+
+    <img src="/images/rounded_square.png" alt="Example Image" class="custom-image3">
+
+    <img src="/images/rounded_square.png" alt="Example Image" class="custom-image4">
+
+    <img src="/images/rounded_square.png" alt="Example Image" class="custom-image5">
+
+    <img src="/images/rounded_square.png" alt="Example Image" class="custom-image6">
+
+
+
+
+
+
 
 
 
