@@ -9,18 +9,8 @@
     <style>
 
 
-
-
-
-
-
-
-
-
-
-
         /* LONG RECTANGLE - BACKGROUND ELEMENT */
-        .custom-image1 {
+        .rectangle {
             position: absolute;
             top: 0px;       
             left: 0px;      
@@ -56,6 +46,21 @@
       
     </style>
 
+
+    <style>
+    .circle {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      width: 50px;
+      height: auto;
+      pointer-events: none; /* Allows for clicking the element underneath */
+      transform: translate(-50%, -50%); /* Centers element on cursor point */
+      transition: 0.05s ease-out; /* Smooths out fast movements */
+
+
+    }
+    </style>
 
     <style>
 
@@ -185,9 +190,11 @@
   
     
     <!-- 'custom-image' class so CSS applies to this image -->
-    <img src="/images/long_rectangle.png" alt="long :)" class="custom-image1">
+    <img src="/images/long_rectangle.png" alt="long :)" class="rectangle">
 
-    <button class="custom-button1"></button>
+    <button class="custom-button1" onclick="let el = document.getElementById('circle'); el.style.display = (el.style.display === 'none') ? 'block' : 'none';"></button> <!-- Uses JavaScript to hide the circle -->>
+
+    <img src="images/circle.png" alt="circle :)" class="circle" id="circle">
 
     <button class="custom-button2"></button>
 
