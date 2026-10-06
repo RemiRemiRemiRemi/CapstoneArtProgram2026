@@ -166,7 +166,17 @@
 
 
 
+      #canvas {
+        display: grid;
+        grid-template-columns: repeat(1000, 1px); /* 16 columns, each 20px wide */
+        grid-template-rows: repeat(1000, 1px);    /* 16 rows, each 20px tall */
+        background-color: #ccc;                  /* Grid line color */
+      }
 
+      .pixel {
+        background-color: #fff;                  /* Default pixel color */
+        cursor: pointer;
+      }
 
       
    
@@ -204,14 +214,28 @@
 
     <button class="custom-button5"></button>
 
+    <div id="canvas"></div>
 
 
+    <script>
+
+    const canvas = document.getElementById('canvas');
+
+    // Create a 16x16 grid (256 pixels)
+    for (let i = 0; i < 1000000; i++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      
+      // Change color to black when clicked
+      pixel.addEventListener('click', () => {
+        pixel.style.backgroundColor = 'black';
+      });
+    
+      canvas.appendChild(pixel);
+    }
 
 
-
-
-
-
+  </script>
 
 
 
