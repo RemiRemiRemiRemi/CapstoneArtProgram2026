@@ -226,11 +226,9 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// Track mouse down state for click-and-drag drawing
 let isDrawing = false;
 
 function draw(e) {
-  // Get exact click coordinates relative to the canvas
   const rect = canvas.getBoundingClientRect();
   const x = Math.floor(e.clientX - rect.left);
   const y = Math.floor(e.clientY - rect.top);
@@ -240,7 +238,6 @@ function draw(e) {
   ctx.fillRect(x, y, 1, 1);
 }
 
-// Event listeners for seamless interaction
 canvas.addEventListener('mousedown', (e) => {
   isDrawing = true;
   draw(e);
