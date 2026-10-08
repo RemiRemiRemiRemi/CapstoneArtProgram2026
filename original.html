@@ -55,7 +55,6 @@
       width: 50px;
       height: auto;
       pointer-events: none; /* Allows for clicking the element underneath */
-      transform: translate(-50%, -50%); /* Centers element on cursor point */
       transition: 0.05s ease-out; /* Smooths out fast movements */
 
 
@@ -265,6 +264,37 @@ window.addEventListener('mouseup', () => {
 
 
   </script>
+
+
+
+
+
+
+<script>
+
+
+
+const follower = document.querySelector('.circle');
+
+document.addEventListener('mousemove', (e) => {
+  // e.clientX and e.clientY get the cursor position relative to the viewport
+  follower.style.transform = `translate(${e.clientX - 75}px, ${e.clientY - 75}px)`;
+});
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 
