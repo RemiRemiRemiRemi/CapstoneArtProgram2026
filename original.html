@@ -290,7 +290,79 @@ document.addEventListener('mousemove', (e) => {
 
 
 
+<script>
 
+
+
+//Add click listener to get starting coordinates
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const startX = Math.floor(e.clientX - rect.left);
+  const startY = Math.floor(e.clientY - rect.top);
+  
+  //Target color to fill with: Red [255, 0, 0, 255]
+  floodFill(startX, startY, [255, 0, 0, 255]);
+});
+
+//The Flood Fill Algorithm (Stack-based / Iterative)
+function floodFill(startX, startY, fillColor) {
+  const width = canvas.width;
+  const height = canvas.height;
+  const imgData = ctx.getImageData(0, 0, width, height);
+  const data = imgData.data;
+
+  //Helper to get color at a pixel
+  function getPixelColor(x, y) {
+    const index = (y * width + x) * 4;
+    return [data[index], data[index+1], data[index+2], data[index+3]];
+  }
+
+  //Helper to set color at a pixel
+  function setPixelColor(x, y) {
+    const index = (y * width + x) * 4;
+    data[index] = fillColor[0];
+    data[index+1] = fillColor[1];
+    data[index+2] = fillColor[2];
+    data[index+3] = fillColor[3];
+  }
+
+  const startColor = getPixelColor(startX, startY);
+
+  //If the target color matches the fill color, stop to avoid infinite loop
+  if (startColor.every((val, i) => val === fillColor[i])) return;
+
+  //Stack holds coordinates to check [ [x, y], ... ]
+
+  while (queue.length > 0) {
+    const [x, y] = queue.pop();
+    const currentColor = getPixelColor(x, y);
+
+    //If matches the starting pixel color, change it and add neighbors
+    if (currentColor.every((val, i) => val === startColor[i])) {
+      setPixelColor(x, y);
+
+      //Push adjacent neighbors (Up, Down, Left, Right)
+      if (x > 0) queue.push([x - 1, y]);
+      if (x < width - 1) queue.push([x + 1, y]);
+      if (y > 0) queue.push([x, y - 1]);
+      if (y < height - 1) queue.push([x, y + 1]);
+    }
+  }
+
+  //Update the canvas with the modified pixel data
+  ctx.putImageData(imgData, 0, 0);
+}
+
+
+
+
+
+
+
+
+
+
+</script>
 
 
 
