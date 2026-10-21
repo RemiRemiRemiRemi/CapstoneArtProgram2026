@@ -278,7 +278,7 @@ window.addEventListener('mouseup', () => {
 const follower = document.querySelector('.circle');
 
 document.addEventListener('mousemove', (e) => {
-  // e.clientX and e.clientY get the cursor position relative to the viewport
+  // e.clientX and e.clientY get the relative cursor position
   follower.style.transform = `translate(${e.clientX - 75}px, ${e.clientY - 75}px)`;
 });
 
@@ -332,6 +332,7 @@ function floodFill(startX, startY, fillColor) {
   if (startColor.every((val, i) => val === fillColor[i])) return;
 
   //Stack holds coordinates to check [ [x, y], ... ]
+  const queue = [[startX, startY]];
 
   while (queue.length > 0) {
     const [x, y] = queue.pop();
