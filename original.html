@@ -199,7 +199,11 @@
     <!-- 'custom-image' class so CSS applies to this image -->
     <img src="/images/long_rectangle.png" alt="long :)" class="rectangle">
 
-    <button class="custom-button1" onclick="let el = document.getElementById('circle'); el.style.display = (el.style.display === 'none') ? 'block' : 'none';"></button> <!-- Uses JavaScript to hide the circle -->>
+
+    <button class="custom-button1" onclick="let el = document.getElementById('circle'); el.style.display = (el.style.display === 'none') ? 'block' : 'none';"onclick="isDrawing=false">
+    
+    
+    </button> <!-- Uses JavaScript to hide the circle -->
 
     <img src="images/circle.png" alt="circle :)" class="circle" id="circle">
 
@@ -229,6 +233,7 @@ const ctx = canvas.getContext('2d');
 let isDrawing = false;
 
 function draw(e) {
+  if(isDrawing === true){
   const rect = canvas.getBoundingClientRect();
   const x = Math.floor(e.clientX - rect.left);
   const y = Math.floor(e.clientY - rect.top);
@@ -237,7 +242,7 @@ function draw(e) {
   ctx.fillStyle = 'black';
   ctx.fillRect(x, y, 1, 1);
 }
-
+}
 canvas.addEventListener('mousedown', (e) => {
   isDrawing = true;
   draw(e);
@@ -364,10 +369,6 @@ function floodFill(startX, startY, fillColor) {
 
 
 </script>
-
-
-
-
 
 
 
