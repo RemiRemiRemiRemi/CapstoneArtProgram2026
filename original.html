@@ -283,12 +283,12 @@ stampBrush(x, y);
 }
 }
 
-    // ADDED: Start drawing when pointer is pressed down
+    // POINTER DOWN SO IT DRAWS
     canvas.addEventListener('pointerdown', (e) => {
       isDrawing = true;
       lastX = e.offsetX;
       lastY = e.offsetY;
-      stampBrush(lastX, lastY); // Draws a single dot on click
+      stampBrush(lastX, lastY);
     });
 
 
