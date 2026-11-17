@@ -217,156 +217,98 @@
 
     <canvas id="canvas" width="1000" height="1000"></canvas>
 
-    <script>
 
 
 
 
 
-
-
+<script>
 
 
 const canvas = document.getElementById('canvas');
+
 const ctx = canvas.getContext('2d');
 
+const brushImg = new Image();
+
+brushImg.src = 'images/circle.png';
+
+let isLoaded = false;
+
+brushImg.onload = () => {
+
+isLoaded = true;
+
+}
+
 let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
 
-function draw(e) {
-  if(isDrawing === true){
-  const rect = canvas.getBoundingClientRect();
-  const x = Math.floor(e.clientX - rect.left);
-  const y = Math.floor(e.clientY - rect.top);
+function stampBrush(x,y){
 
-  // Fill a 1x1 pixel area
-  ctx.fillStyle = 'black';
-  ctx.fillRect(x, y, 1, 1);
+if(!isLoaded) return;
+
+const size = 32;
+
+const drawX = x - size / 2;
+const drawY = y - size / 2;
+
+ctx.drawImage(brushImg, drawX, drawY, size, size);
+}
+
+function getDistance(x0, y0, x1, y1){
+
+const dx = x1 - x0;
+const dy = y1 - y0;
+return Math.sqrt(dx * dx + dy * dy);
+
+
+}
+
+function drawLine(x0, y0, x1, y1){
+
+
+const dist = getDistance(x0, y0, x1, y1);
+
+const steps = Math.max(Math.ceil(dist), 1);
+
+for (let i = 0; i <= steps; i++) {
+
+const t = i / steps;
+const x = x0 + (x1 - x0) * t;
+const y = y0 + (y1 - y0) * t;
+stampBrush(x, y);
+
 }
 }
-canvas.addEventListener('mousedown', (e) => {
-  isDrawing = true;
-  draw(e);
+
+    // ADDED: Start drawing when pointer is pressed down
+    canvas.addEventListener('pointerdown', (e) => {
+      isDrawing = true;
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+      stampBrush(lastX, lastY); // Draws a single dot on click
+    });
+
+
+canvas.addEventListener('pointermove',(e) =>{
+
+
+if (!isDrawing) return;
+drawLine(lastX, lastY, e.offsetX, e.offsetY);
+lastX = e.offsetX;
+lastY = e.offsetY;
+
+
 });
 
-canvas.addEventListener('mousemove', (e) => {
-  if (isDrawing) draw(e);
-});
 
-window.addEventListener('mouseup', () => {
+
+
+window.addEventListener('pointerup', () => {
   isDrawing = false;
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </script>
-
-
-
-
-
-
-<script>
-
-
-
-const follower = document.querySelector('.circle');
-
-document.addEventListener('mousemove', (e) => {
-  // e.clientX and e.clientY get the relative cursor position
-  follower.style.transform = `translate(${e.clientX - 75}px, ${e.clientY - 75}px)`;
-});
-
-
-
-
-</script>
-
-
-
-
-<script>
-
-
-
-//Add click listener to get starting coordinates
-canvas.addEventListener('click', (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const startX = Math.floor(e.clientX - rect.left);
-  const startY = Math.floor(e.clientY - rect.top);
-  
-  //Target color to fill with: Red [255, 0, 0, 255]
-  floodFill(startX, startY, [255, 0, 0, 255]);
-});
-
-//The Flood Fill Algorithm (Stack-based / Iterative)
-function floodFill(startX, startY, fillColor) {
-  const width = canvas.width;
-  const height = canvas.height;
-  const imgData = ctx.getImageData(0, 0, width, height);
-  const data = imgData.data;
-
-  //Helper to get color at a pixel
-  function getPixelColor(x, y) {
-    const index = (y * width + x) * 4;
-    return [data[index], data[index+1], data[index+2], data[index+3]];
-  }
-
-  //Helper to set color at a pixel
-  function setPixelColor(x, y) {
-    const index = (y * width + x) * 4;
-    data[index] = fillColor[0];
-    data[index+1] = fillColor[1];
-    data[index+2] = fillColor[2];
-    data[index+3] = fillColor[3];
-  }
-
-  const startColor = getPixelColor(startX, startY);
-
-  //If the target color matches the fill color, stop to avoid infinite loop
-  if (startColor.every((val, i) => val === fillColor[i])) return;
-
-  //Stack holds coordinates to check [ [x, y], ... ]
-  const queue = [[startX, startY]];
-
-  while (queue.length > 0) {
-    const [x, y] = queue.pop();
-    const currentColor = getPixelColor(x, y);
-
-    //If matches the starting pixel color, change it and add neighbors
-    if (currentColor.every((val, i) => val === startColor[i])) {
-      setPixelColor(x, y);
-
-      //Push adjacent neighbors (Up, Down, Left, Right)
-      if (x > 0) queue.push([x - 1, y]);
-      if (x < width - 1) queue.push([x + 1, y]);
-      if (y > 0) queue.push([x, y - 1]);
-      if (y < height - 1) queue.push([x, y + 1]);
-    }
-  }
-
-  //Update the canvas with the modified pixel data
-  ctx.putImageData(imgData, 0, 0);
-}
-
-
-
-
-
-
-
-
-
 
 </script>
 
