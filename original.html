@@ -195,13 +195,14 @@
 
 
   
-    
     <img src="/images/long_rectangle.png" alt="long :)" class="rectangle">
 
     <script>
     let drawingToggle = false;
     let erasingToggle = false;
     </script>
+
+    <!--BUTTONS-->
 
     <button class="custom-button1" onclick="let el = document.getElementById('circle'); el.style.display = (el.style.display === 'none') ? 'block' : 'none';
 
@@ -213,9 +214,9 @@
     <img src="images/circle.png" alt="circle :)" class="circle" id="circle">
 
     <button class="custom-button2" onclick="let el = document.getElementById('circle'); el.style.display = 'none';
-    
-    drawingToggle = true;
-    erasingToggle = !erasingToggle;
+
+    drawingToggle = !drawingToggle;
+    erasingToggle = drawingToggle;
     
     "></button>
 
